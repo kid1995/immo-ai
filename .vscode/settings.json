@@ -9,5 +9,17 @@
   "files.exclude": {
     "**/__pycache__": true,
     "**/.pytest_cache": true
-  }
+},
+"cSpell.words": [
+    "appendonly",
+    "dpage",
+    "healthcheck",
+    "immo",
+    "initdb",
+    "isready",
+    "pgadmin",
+    "PGADMIN",
+    "redisinsight",
+    "supabase"
+]
 }
