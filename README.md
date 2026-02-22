@@ -140,7 +140,7 @@ immo-ai/
 │   ├── config.py               # pydantic-settings, reads .env
 │   ├── database.py             # SQLAlchemy async engine
 │   ├── models.py               # ORM models
-│   ├── container.py            # Adapter factory / DI container
+│   ├── di_container.py            # Adapter factory / DI container
 │   └── ports/                  # Abstract interfaces
 │       ├── crawler_port.py
 │       ├── llm_port.py
