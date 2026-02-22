@@ -1,5 +1,5 @@
-from abc import ABC, abstractmethod
 from dataclasses import dataclass
+from typing import Protocol, runtime_checkable
 
 
 @dataclass
@@ -19,14 +19,12 @@ class Competitor:
     review_count: int | None = None
 
 
-class MapPort(ABC):
-    @abstractmethod
+@runtime_checkable
+class MapPort(Protocol):
     async def geocode(self, address: str) -> GeoPoint | None: ...
 
-    @abstractmethod
     async def reverse_geocode(self, lat: float, lng: float) -> str | None: ...
 
-    @abstractmethod
     async def find_competitors(
         self,
         lat: float,

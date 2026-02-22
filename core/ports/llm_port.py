@@ -1,6 +1,5 @@
-from abc import ABC, abstractmethod
 from dataclasses import dataclass
-from typing import Any
+from typing import Any, Protocol, runtime_checkable
 
 
 @dataclass
@@ -17,8 +16,8 @@ class LLMResponse:
     output_tokens: int
 
 
-class LLMPort(ABC):
-    @abstractmethod
+@runtime_checkable
+class LLMPort(Protocol):
     async def complete(
         self,
         messages: list[LLMMessage],
@@ -27,11 +26,10 @@ class LLMPort(ABC):
         max_tokens: int = 1024,
     ) -> LLMResponse: ...
 
-    @abstractmethod
     async def complete_structured(
         self,
         messages: list[LLMMessage],
-        output_schema: type,  # Pydantic model
+        output_schema: type,
         system: str | None = None,
     ) -> Any:
         """Return structured output validated against a Pydantic model."""
