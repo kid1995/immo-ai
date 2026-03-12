@@ -13,18 +13,16 @@ class Settings(BaseSettings):
     log_level: str = "debug"
 
     # ── Database ──────────────────────────────
-    database_url: str = (
-        "postgresql+asyncpg://postgres:postgres@localhost:5432/immo_ai"
-    )
+    database_url: str = "postgresql+asyncpg://postgres:postgres@localhost:5432/immo_ai"
 
     # ── Redis ─────────────────────────────────
     redis_url: str = "redis://localhost:6379"
 
     # ── Adapter selection ─────────────────────
-    crawler_provider: str = "crawl4ai"   # crawl4ai | playwright | httpx
-    llm_provider: str = "anthropic"      # anthropic | openai | ollama
-    map_provider: str = "overpass"       # overpass | google_maps
-    embedding_provider: str = "openai"   # openai | local
+    crawler_provider: str = "crawl4ai"  # crawl4ai | playwright | httpx
+    llm_provider: str = "anthropic"  # anthropic | openai | ollama
+    map_provider: str = "overpass"  # overpass | google_maps
+    embedding_provider: str = "openai"  # openai | local
 
     # ── API Keys ──────────────────────────────
     anthropic_api_key: str = ""

@@ -20,10 +20,12 @@ from core.database import Base
 # pgvector type – registered after extension is loaded
 try:
     from pgvector.sqlalchemy import Vector
+
     VECTOR_TYPE = Vector(1536)
 except ImportError:
     # Fallback during early dev before pgvector is installed
     from sqlalchemy import Text as Vector  # type: ignore[assignment]
+
     VECTOR_TYPE = Text()
 
 
@@ -34,7 +36,7 @@ class Listing(Base):
     id: Mapped[uuid.UUID] = mapped_column(
         UUID(as_uuid=True), primary_key=True, default=uuid.uuid4
     )
-    source: Mapped[str] = mapped_column(String(50))           # immoscout | kleinanzeigen
+    source: Mapped[str] = mapped_column(String(50))  # immoscout | kleinanzeigen
     source_id: Mapped[str | None] = mapped_column(String(100))
     source_url: Mapped[str | None] = mapped_column(Text)
 
@@ -100,7 +102,9 @@ class LocationIntel(Base):
     altersstruktur: Mapped[dict | None] = mapped_column(JSONB)
 
     # ── Competitors ───────────────────────────
-    competitors: Mapped[list | None] = mapped_column(JSONB)  # [{name, category, distance_m, rating}]
+    competitors: Mapped[list | None] = mapped_column(
+        JSONB
+    )  # [{name, category, distance_m, rating}]
     competitor_count: Mapped[int | None] = mapped_column(Integer)
 
     # ── Economics ─────────────────────────────
@@ -122,7 +126,9 @@ class ListingScore(Base):
     listing_id: Mapped[uuid.UUID] = mapped_column(
         UUID(as_uuid=True), ForeignKey("listings.id"), primary_key=True
     )
-    branche: Mapped[str] = mapped_column(String(50), primary_key=True)  # nail | restaurant
+    branche: Mapped[str] = mapped_column(
+        String(50), primary_key=True
+    )  # nail | restaurant
 
     # ── Scores (0.0 – 10.0) ───────────────────
     score_gesamt: Mapped[float | None] = mapped_column(Numeric(4, 2))
